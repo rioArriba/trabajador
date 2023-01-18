@@ -21,8 +21,8 @@ export class TrabajadorComponent {
     this.titulo = this.servicio.getTitulo();
   }
 
-  like(id:number) {
-    
+  borrar(id:number) {
+    this.servicio.borrar(id);
   }
    
 }
