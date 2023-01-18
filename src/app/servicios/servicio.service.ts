@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Trabajador } from '../modulos/trabajador';
+import { Trabajador } from '../Modelos/trabajador';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +67,7 @@ export class ServicioService {
  public setVotos(id:number, value:number) {
   let trabajador = this.getById(id);
   trabajador && trabajador.votos == 0 && value < 0 ? trabajador.votos += value : alert('pobre chaval');
+  trabajador && value > 0 ? trabajador.votos += value : alert('pobre chaval');
  }
 
  public borrar(id:number): void {

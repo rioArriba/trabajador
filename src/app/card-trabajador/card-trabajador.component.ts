@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Trabajador } from '../modulos/trabajador';
-import { ServicioService } from '../servicios/servicio.service';
+import { Trabajador } from '../Modelos/trabajador';
 import { Output, EventEmitter } from '@angular/core';
 // importar Input, Output y Event Emitter from '@angular/core'
 // importar Trabajador
@@ -11,24 +10,23 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./card-trabajador.component.css']
 })
 export class CardTrabajadorComponent implements OnInit {
-  @Input() trabajadores: Trabajador[]  = [];
-  @Input() titulo: string = "";
+   trabajadores: Trabajador[]  = [];
+   titulo: string = "";
+   @Input() trabajador!:Trabajador
+   @Output() eventoBorrar =new EventEmitter<number>
+   @Output() botonLike =new EventEmitter<number>
+   @Output() botonUnlike =new EventEmitter<number>
   
   
   // decorador input para el trabajador que se le pasa desde el padre
-  @Output() botonLike = new EventEmitter<number>();
-  @Output() botonUnlike = new EventEmitter<number>();
-  @Output() botonBorrar = new EventEmitter<number>();
   // decxorador output para el evento likeTrabajador  
   // decxorador output para el evento unlikeTrabajador  
   // decxrador output para el evento borraTrabajador  
     
-  constructor(private servicio: ServicioService) { 
+  constructor() { 
   }
 
   ngOnInit(): void {
-    this.trabajadores = this.servicio.getTrabajadores();
-    this.titulo = this.servicio.getTitulo();
   }
 
   //metodo que recibe un trabajador y emite el evento likeTrabajador con el id del trabajador
@@ -43,6 +41,6 @@ export class CardTrabajadorComponent implements OnInit {
 
   //metodo que recibe un trabajador y emite el evento borraTrabajador con el id del trabajador
   eliminar(trabajadorId:number){
-    this.botonBorrar.emit(trabajadorId);
+    this.eventoBorrar.emit(trabajadorId);
   }
 }
